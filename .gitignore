@@ -1,0 +1,6 @@
+# Ignore .env in frontend
+frontend/.env
+backend/.env
+backend/oauth.json
+# Ignore any .env in any subdirectory (optional, if you want to ignore all)
+**/.env
