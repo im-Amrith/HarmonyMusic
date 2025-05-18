@@ -1,0 +1,347 @@
+/* EnhancedHome.css */
+
+/* Import a modern font (ensure it's available or linked in HTML) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Global variables can remain if they are used by EnhancedHome content specifically */
+/* Or, ideally, these are defined in a more global theme file (e.g., theme.js or index.css) */
+:root {
+  --font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --background-color: #121212; /* Deep dark grey / black */
+  --text-color: #E0E0E0;
+  --primary-accent: #1DB954; /* Vibrant Green (Spotify-like) */
+  --primary-accent-hover: #1ED760;
+  --card-background: #1E1E1E;
+  --card-hover-background: #282828;
+  /* --glass-background: rgba(255, 255, 255, 0.05); */ /* Glass is now handled by Sidebar.css and potentially Player.css */
+  /* --glass-blur: 10px; */
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+}
+
+/* Body styles are generally okay if this is the primary global CSS, 
+   but ensure they don't conflict with MUI's CssBaseline or ThemeProvider settings. 
+   If using MUI ThemeProvider and CssBaseline, these might be better set there. */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family-sans-serif);
+  margin: 0;
+  padding: 0;
+  /* overflow-x: hidden; */ /* Layout.js should handle overflow for its main content area */
+}
+
+/* Styles for the content area rendered by EnhancedHome.js */
+/* The .app-container, .sidebar, .main-content, and .player-bar styles from the original file are removed 
+   as this structure is now handled by Layout.js and Sidebar.js */
+
+.enhanced-home-content-area {
+    /* This class is now the root of EnhancedHome.js content. 
+       It doesn't need flex or 100vh as it sits inside Layout.js's main content area. */
+    /* Add any specific padding or margins for the overall home content if needed, 
+       though Layout.js already adds padding to its main content area. */
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+}
+
+.bento-item {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-lg);
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.bento-item.welcome-banner {
+    /* Specific styles for the welcome banner bento item */
+}
+
+.bento-item.filter-section {
+    /* Specific styles for the filter section bento item */
+}
+
+.bento-item-content-card-wrapper {
+    /* Wrapper for skeleton cards if needed, or apply directly to skeleton */
+}
+
+/* Specific Bento Item Sizing (Examples - to be applied via className or sx prop) */
+.bento-item-large {
+  grid-column: span 2; /* Example: makes item span 2 columns */
+}
+/* .bento-item-tall {
+  grid-row: span 2; 
+} */
+
+/* Typography within EnhancedHome.js */
+.welcome-header {
+  font-size: 2.5rem; 
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #FFFFFF;
+}
+
+.section-title {
+  font-size: 1.75rem; 
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #FFFFFF;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+/* Filter Buttons */
+.filter-button-group .MuiButton-root {
+  border-radius: 20px; /* Pill shape */
+  text-transform: none;
+  font-weight: 500;
+  padding: 6px 16px;
+  /* margin-right: 8px !important; */ /* Gap is handled by parent Box now */
+  border: 1px solid var(--primary-accent) !important;
+  color: var(--primary-accent) !important;
+}
+
+.filter-button-group .MuiButton-root.Mui-selected,
+.filter-button-group .MuiButton-root:hover {
+  background-color: var(--primary-accent) !important;
+  color: white !important;
+}
+
+/* Content Cards */
+.content-card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  height: 100%; /* Ensure cards in a grid take full height of their cell if needed */
+  display: flex;
+  flex-direction: column;
+}
+
+.content-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.content-card .card-media-image {
+  /* height: 180px; */ /* Let image aspect ratio define height or use sx prop for specific cases */
+  aspect-ratio: 1 / 1; /* Make images square, adjust as needed */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.content-card:hover .card-media-image {
+  transform: scale(1.05);
+}
+
+.content-card .card-content-details {
+  padding: 16px;
+  flex-grow: 1; /* Allows content to push actions to bottom if card has fixed height */
+}
+
+.play-icon-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none; /* Allow click through to card unless icon itself is clicked */
+}
+
+.content-card:hover .play-icon-overlay {
+  opacity: 1;
+  pointer-events: auto; /* Enable click on icon when visible */
+}
+
+/* Skeleton Loader Animation */
+.MuiSkeleton-root {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.MuiSkeleton-root::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent) !important;
+  animation: MuiSkeleton-keyframes-wave 1.6s linear 0.5s infinite !important;
+}
+
+/* Helper for horizontal scroll */
+.horizontal-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding-bottom: 10px; /* For scrollbar visibility if needed */
+    /* Add padding to the sides if items are too close to edges of the Paper */
+    /* padding-left: 4px; 
+    padding-right: 4px; */
+}
+
+.horizontal-scroll-container > .content-card.horizontal-scroll-item {
+    flex-shrink: 0;
+    width: 200px; /* Example width for cards in horizontal scroll */
+}
+
+/* Hide scrollbar for a cleaner look (optional) */
+.horizontal-scroll-container::-webkit-scrollbar {
+    display: none; /* For Webkit browsers */
+}
+.horizontal-scroll-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* EnhancedHome.css */
+
+/* Base styles remain the same */
+:root {
+  --font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --background-color: #121212;
+  --text-color: #E0E0E0;
+  --primary-accent: #1DB954;
+  --primary-accent-hover: #1ED760;
+  --card-background: #1E1E1E;
+  --card-hover-background: #282828;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --now-playing-color: #1DB954;
+}
+
+/* Now Playing Indicator */
+.content-card.playing {
+  position: relative;
+  border: 2px solid var(--now-playing-color);
+}
+
+.now-playing-indicator {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  color: var(--now-playing-color);
+  display: flex;
+  align-items: center;
+}
+
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  height: 20px;
+  margin-left: 6px;
+}
+
+.equalizer span {
+  display: block;
+  width: 3px;
+  margin-right: 2px;
+  background-color: var(--now-playing-color);
+  animation: equalize 1.5s infinite ease-in-out;
+}
+
+.equalizer span:nth-child(1) {
+  height: 60%;
+  animation-delay: 0s;
+}
+
+.equalizer span:nth-child(2) {
+  height: 30%;
+  animation-delay: 0.5s;
+}
+
+.equalizer span:nth-child(3) {
+  height: 75%;
+  animation-delay: 0.2s;
+}
+
+@keyframes equalize {
+  0%, 100% {
+    height: 30%;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+/* Play Button Overlay */
+.play-icon-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--primary-accent);
+  color: white;
+  border-radius: 50%;
+  padding: 12px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-card:hover .play-icon-overlay {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.content-card.playing .play-icon-overlay {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Error Message Styling */
+.error-message {
+  color: #ff4d4d;
+  background-color: rgba(255, 77, 77, 0.1);
+  padding: 8px 12px;
+  border-radius: var(--border-radius-md);
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+/* Top Bar Styles */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-md);
+  margin-bottom: 20px;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Rest of your existing CSS remains the same */

@@ -1,0 +1,109 @@
+/* Sidebar.css */
+
+:root {
+    --sidebar-background: rgba(30, 30, 30, 0.7); /* Dark glassmorphism base */
+    --sidebar-blur: 10px;
+    --sidebar-border-color: rgba(255, 255, 255, 0.1);
+    --sidebar-text-color: #E0E0E0;
+    --sidebar-icon-color: #B0B0B0;
+    --sidebar-selected-background: #1DB954; /* Vibrant Green */
+    --sidebar-selected-text-color: #FFFFFF;
+    --sidebar-hover-background: rgba(255, 255, 255, 0.08);
+    --sidebar-item-border-radius: 8px;
+  }
+  
+  .sidebar-nav-container .MuiDrawer-paper {
+    background-color: var(--sidebar-background) !important;
+    backdrop-filter: blur(var(--sidebar-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--sidebar-blur)) !important;
+    border-right: 1px solid var(--sidebar-border-color) !important;
+    color: var(--sidebar-text-color) !important;
+  }
+  
+  .sidebar-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .sidebar-toolbar {
+    padding: 16px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* For logo and potential collapse button */
+    border-bottom: 1px solid var(--sidebar-border-color);
+  }
+  
+  .sidebar-logo {
+    font-weight: 700 !important;
+    color: var(--sidebar-selected-text-color) !important; /* White for Harmony logo */
+    flex-grow: 1; /* Allow logo to take space */
+    text-align: center; /* Center logo if no collapse button */
+  }
+  
+  .desktop-sidebar.collapsed .sidebar-logo {
+      font-size: 1rem !important; /* Smaller logo text when collapsed */
+      /* Or hide text and show only an icon */
+  }
+  
+  .sidebar-nav-list {
+    padding: 16px !important;
+    flex-grow: 1;
+    overflow-y: auto; /* In case of many items */
+  }
+  
+  .sidebar-nav-item {
+    border-radius: var(--sidebar-item-border-radius) !important;
+    margin-bottom: 8px !important;
+    transition: background-color 0.2s ease-in-out !important;
+  }
+  
+  .sidebar-nav-item .sidebar-nav-icon {
+    color: var(--sidebar-icon-color) !important;
+    min-width: 40px !important;
+    margin-left: -4px; /* Adjust icon position slightly */
+  }
+  
+  .sidebar-nav-item .sidebar-nav-text .MuiTypography-root {
+    font-weight: 500 !important;
+    color: var(--sidebar-text-color);
+  }
+  
+  .sidebar-nav-item:hover {
+    background-color: var(--sidebar-hover-background) !important;
+  }
+  
+  .sidebar-nav-item.Mui-selected {
+    background-color: var(--sidebar-selected-background) !important;
+  }
+  
+  .sidebar-nav-item.Mui-selected .sidebar-nav-icon,
+  .sidebar-nav-item.Mui-selected .sidebar-nav-text .MuiTypography-root {
+    color: var(--sidebar-selected-text-color) !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Styles for collapsed desktop sidebar */
+  .desktop-sidebar.collapsed .sidebar-toolbar {
+    justify-content: center; /* Center icon/logo when collapsed */
+  }
+  
+  .desktop-sidebar.collapsed .sidebar-nav-item {
+    justify-content: center;
+    padding-left: 12px !important; /* Adjust padding for centered icon */
+    padding-right: 12px !important;
+  }
+  
+  .desktop-sidebar.collapsed .sidebar-nav-icon {
+    margin-left: 0 !important; /* Reset margin for centered icon */
+  }
+  
+  .desktop-sidebar.collapsed .sidebar-nav-text {
+    display: none !important; /* Hide text when collapsed */
+  }
+  
+  /* Ensure mobile toggle button (if placed in AppBar by Layout.js) is visible */
+  /* This is a placeholder, actual styling depends on where Layout.js places it */
+  
+  
+  
